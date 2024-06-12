@@ -9,8 +9,9 @@ const DEFAULT_OPTIONS: HTMLBeautifyOptions = {
   indent_inner_html: true,
   wrap_attributes: 'preserve',
   wrap_line_length: 140,
+  indent_size: 2,
 };
-
+export type TYPE_WRAP_ATTRIBUTES = "preserve" | "auto" | "force" | "force-aligned" | "force-expand-multiline" | "aligned-multiple" | "preserve-aligned" | undefined;
 /**
  * Format the given HTML text using js-beautify and some hard-coded options
  */
@@ -18,12 +19,17 @@ export function formatHtmlDocument(text: string): string {
   const conf = vscode.workspace.getConfiguration('editor');
   const tabSize = conf?.get<number>('tabSize') ?? 2;
   const insertSpaces = conf?.get<boolean>('insertSpaces') ?? true;
+  const configHtml = vscode.workspace.getConfiguration('html');
+  const wrapAttributes = configHtml?.get<TYPE_WRAP_ATTRIBUTES>('format.wrapAttributes') ?? 'preserve';
+  const wrapLineLength = configHtml?.get<number>('format.wrapLineLength') ?? 140;
 
   let formattedText = html(text, {
     ...DEFAULT_OPTIONS,
     indent_size: tabSize,
     indent_with_tabs: !insertSpaces,
-    wrap_attributes_indent_size: tabSize
+    wrap_attributes_indent_size: tabSize,
+    wrap_attributes: wrapAttributes,
+    wrap_line_length: wrapLineLength,
   });
 
   // Add whitespaces between the "@<if|else|defer|...>" and the "(" in Angular bindings

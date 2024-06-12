@@ -3,6 +3,7 @@
   "displayName": "Mobio Angular Format Html",
   "description": "Format angular html new syntax template",
   "version": "0.0.2",
+  "icon": "images/mobio.png",
   "engines": {
     "vscode": "^1.90.0"
   },
@@ -14,10 +15,12 @@
   "categories": [
     "Formatters"
   ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "author": "Mobio",
   "license": "MIT",
   "publisher": "boivn",
-  "activationEvents": [],
   "main": "./dist/extension.js",
   "repository": {
     "type": "git",
