@@ -1,0 +1,77 @@
+{
+  "name": "mobio-format-angular-html",
+  "displayName": "Mobio Angular Format Html",
+  "description": "Format angular html new syntax template",
+  "version": "0.0.2",
+  "icon": "images/mobio.png",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "keywords": [
+    "angular",
+    "beautify",
+    "html"
+  ],
+  "categories": [
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "author": "Mobio",
+  "license": "MIT",
+  "publisher": "boivn",
+  "main": "./dist/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vuboi/mobio-angular-format-html"
+  },
+  "contributes": {
+    "configurationDefaults": {
+      "[html]": {
+        "editor.defaultFormatter": "mobio.angular-format-html"
+      }
+    },
+    "commands": [
+      {
+        "command": "mobio.format-angular-html-file",
+        "title": "Format Angular HTML File",
+        "enablement": "editorLangId == html"
+      }
+    ]
+  },
+  "scripts": {
+    "pack": "vsce pack",
+    "publish": "vsce publish",
+    "publish:major": "vsce publish major",
+    "publish:minor": "vsce publish minor",
+    "publish:patch": "vsce publish patch",
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.90.0",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0",
+    "eslint": "^8.57.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@types/js-beautify": "^1.14.3",
+    "js-beautify": "^1.15.1"
+  }
+}
